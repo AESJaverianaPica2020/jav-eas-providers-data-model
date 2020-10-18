@@ -1,0 +1,131 @@
+show dbs;
+
+use touresbalon;
+
+db.createCollection('providers');
+
+db.providers.insert({
+            'type': 'HOTELS',
+            'name': 'ABC',
+            'integrationType': 'DATABASE',
+            'settings': {
+                'request': {
+                    'parameters': {
+                        'endpoint': 'localhost:3306/MyBD',
+                        'user': 'abcv',
+                        'password': '234432',
+                        'engineType': 'MYSQL',
+                        'statements': {
+                            'catalogue': 'SELECT * FROM HJKAS',
+                            'reserve': 'INSERT INTO ASD ...'
+                        }
+                    }
+                },
+                'response': {}
+            }
+        });
+
+db.providers.insert({
+            'type': 'TRANSPORT',
+            'name': 'BUSES S.A',
+            'integrationType': 'SOAP',
+            'settings': {
+                'request': {
+                    'parameters': {
+                        'endpoint': 'http:localhost:2393/api',
+                        'wsdl': 'werfghjhgfds',
+                        'methods': {
+                            'catalogue': 'getCatalgas',
+                            'reserve': 'serReserve'
+                        }
+                    }
+                },
+                'response': {}
+            }
+        });
+
+db.providers.insert({
+            'type': 'HOTELS',
+            'name': 'UYT',
+            'integrationType': 'FTP',
+            'settings': {
+                'request': {
+                    'parameters': {
+                        'endpoint': 'localhost',
+                        'user': 'ASDSFDGFHGJ',
+                        'password': 'ASDFGFH32443',
+                        'path': 'pepito/',
+                        'filename': 'miarchivo',
+                        'delimeter': ','
+                    }
+                },
+                'response': {
+
+                }
+            }
+        });
+
+db.providers.insert({
+            'type': 'TRANSPORT',
+            'name': 'AVIANCA',
+            'integrationType': 'DATABASE',
+            'settings': {
+                'request': {
+                    'parameters': {
+                        'endpoint': 'localhost:3306/AVIANCA',
+                        'user': 'ASDSFDGFHGJ',
+                        'password': 'ASDFGFH32443',
+                        'engineType': 'ORACLE',
+                        'statements': {
+                            'catalogue': 'SELECT * FROM SDFGH',
+                            'reserve': 'INSERT INTO WERTGH ...'
+                        }
+                    }
+                },
+                'response': {}
+            }
+        });
+
+db.providers.insert({
+            'type': 'TRANSPORT',
+            'name': 'VIVA_COLOMBIA',
+            'integrationType': 'FTP',
+            'settings': {
+                'request': {
+                    'parameters': {
+                        'endpoint': 'localhost',
+                        'user': 'ASDSFDGFHGJ',
+                        'password': 'ASDFGFH32443',
+                        'path': 'pepito/',
+                        'filename': 'miarchivo',
+                        'delimeter': ','
+                    }
+                },
+                'response': {
+
+                }
+            }
+        });
+
+db.providers.insert({
+            'type': 'EVENTS',
+            'name': 'CONCIERTOS ACVDE',
+            'integrationType': 'FTP',
+            'settings': {
+                'request': {
+                    'parameters': {
+                        'endpoint': 'localhost',
+                        'user': 'ASDSFDGFHGJ',
+                        'password': 'ASDFGFH32443',
+                        'path': 'pepito/',
+                        'filename': 'miarchivo',
+                        'delimeter': ','
+                    }
+                },
+                'response': {
+
+                }
+            }
+        });
+
+db.providers.find();
