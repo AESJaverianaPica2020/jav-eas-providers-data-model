@@ -15,7 +15,7 @@ db.providers.insert({
               'catalogue': {
                 'endpoint': 'http://192.168.1.100:8888/TuresBalonProviders-Avianca-context-root/ServicioAviancaVuelosSoapHttpPort',
                 'Action': 'http://servicios.avianca.com/types/consultarVuelo',
-                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http: //schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://servicios.avianca.com/types/"><soapenv:Header/><soapenv:Body><typ:consultarVueloElement><typ:ciudadOrigen>@ciudadOrigen</typ:ciudadOrigen><typ:ciudadDestino>@ciudadDestino</typ:ciudadDestino><typ:fechaSalida>@fechaSalida</typ:fechaSalida><typ:clase>@clase</typ:clase></typ:consultarVueloElement></soapenv:Body></soapenv:Envelope>',
+                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://servicios.avianca.com/types/"><soapenv:Header/><soapenv:Body><typ:consultarVueloElement><typ:ciudadOrigen>@ciudadOrigen</typ:ciudadOrigen><typ:ciudadDestino>@ciudadDestino</typ:ciudadDestino><typ:fechaSalida>@fechaSalida</typ:fechaSalida><typ:clase>@clase</typ:clase></typ:consultarVueloElement></soapenv:Body></soapenv:Envelope>',
                 'NullableParams': [
                 '@ciudadOrigen',
                 '@ciudadDestino',
@@ -34,7 +34,7 @@ db.providers.insert({
               'reserve': {
                 'endpoint': 'http://192.168.1.100:8888/TuresBalonProviders-Avianca-context-root/ServicioAviancaVuelosSoapHttpPort',
                 'Action': 'http://servicios.avianca.com/types/reservarVuelo',
-                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http: //schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://servicios.avianca.com/types/"><soapenv:Header/><soapenv:Body><typ:reservarVueloElement><typ:vuelo><typ:fechaSalida>@fechaSalida</typ:fechaSalida><typ:fechaLlegada>@fechaLlegada</typ:fechaLlegada><typ:ciudadOrigen>@ciudadOrigen</typ:ciudadOrigen><typ:vuelo>@vuelo</typ:vuelo><typ:clase>@clase</typ:clase><typ:ciudadDestino>@ciudadDestino</typ:ciudadDestino><typ:precio>@precio</typ:precio></typ:vuelo><typ:nombrePasajero>@nombrePasajero</typ:nombrePasajero><typ:numeroIdentidadPasajero>@numeroIdentidadPasajero</typ:numeroIdentidadPasajero></typ:reservarVueloElement></soapenv:Body></soapenv:Envelope>',
+                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://servicios.avianca.com/types/"><soapenv:Header/><soapenv:Body><typ:reservarVueloElement><typ:vuelo><typ:fechaSalida>@fechaSalida</typ:fechaSalida><typ:fechaLlegada>@fechaLlegada</typ:fechaLlegada><typ:ciudadOrigen>@ciudadOrigen</typ:ciudadOrigen><typ:vuelo>@vuelo</typ:vuelo><typ:clase>@clase</typ:clase><typ:ciudadDestino>@ciudadDestino</typ:ciudadDestino><typ:precio>@precio</typ:precio></typ:vuelo><typ:nombrePasajero>@nombrePasajero</typ:nombrePasajero><typ:numeroIdentidadPasajero>@numeroIdentidadPasajero</typ:numeroIdentidadPasajero></typ:reservarVueloElement></soapenv:Body></soapenv:Envelope>',
                 'NullableParams': [
                 '@fechaSalida',
                 '@fechaLlegada',
@@ -73,7 +73,7 @@ db.providers.insert({
               'catalogue': {
                 'endpoint': 'http://192.168.1.100:8888/TuresBalonProviders-AA-context-root/AAFlightsServiceSoapHttpPort',
                 'Action': 'http://services.aa.com/types/searchFlight',
-                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http: //schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://services.aa.com/types/"><soapenv:Header/><soapenv:Body><typ:searchFlightElement><typ:departinCity>@departinCity</typ:departinCity><typ:arrivingCity>@arrivingCity</typ:arrivingCity><typ:departinDate>@departinDate</typ:departinDate><typ:cabin>@cabin</typ:cabin><typ:PromotionCode>@PromotionCode</typ:PromotionCode></typ:searchFlightElement></soapenv:Body></soapenv:Envelope>',
+                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://services.aa.com/types/"><soapenv:Header/><soapenv:Body><typ:searchFlightElement><typ:departinCity>@departinCity</typ:departinCity><typ:arrivingCity>@arrivingCity</typ:arrivingCity><typ:departinDate>@departinDate</typ:departinDate><typ:cabin>@cabin</typ:cabin><typ:PromotionCode>@PromotionCode</typ:PromotionCode></typ:searchFlightElement></soapenv:Body></soapenv:Envelope>',
                 'NullableParams': [
                 '@departinCity',
                 '@arrivingCity',
@@ -86,7 +86,7 @@ db.providers.insert({
               'reserve': {
                 'endpoint': 'http://192.168.1.100:8888/TuresBalonProviders-AA-context-root/AAFlightsServiceSoapHttpPort',
                 'Action': 'http://services.aa.com/types/bookFligth',
-                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http: //schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://services.aa.com/types/"><soapenv:Header/><soapenv:Body><typ:bookFligthElement><typ:f><typ:cabin>@cabin</typ:cabin><typ:arrivingDate>@arrivingDate</typ:arrivingDate><typ:price>@price</typ:price><typ:arrivingCity>@arrivingCity</typ:arrivingCity><typ:meals>@meals</typ:meals><typ:departinDate>@departinDate</typ:departinDate><typ:departinCity>@departinCity</typ:departinCity><typ:number>@number</typ:number></typ:f><typ:passengerName>@passengerName</typ:passengerName></typ:bookFligthElement></soapenv:Body></soapenv:Envelope>',
+                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://services.aa.com/types/"><soapenv:Header/><soapenv:Body><typ:bookFligthElement><typ:f><typ:cabin>@cabin</typ:cabin><typ:arrivingDate>@arrivingDate</typ:arrivingDate><typ:price>@price</typ:price><typ:arrivingCity>@arrivingCity</typ:arrivingCity><typ:meals>@meals</typ:meals><typ:departinDate>@departinDate</typ:departinDate><typ:departinCity>@departinCity</typ:departinCity><typ:number>@number</typ:number></typ:f><typ:passengerName>@passengerName</typ:passengerName></typ:bookFligthElement></soapenv:Body></soapenv:Envelope>',
                 'NullableParams': [
                 '@cabin',
                 '@arrivingDate',
@@ -126,7 +126,7 @@ db.providers.insert({
               'catalogue': {
                 'endpoint': 'http://192.168.1.100:8888/TuresBalonProviders-HRS-context-root/HiltonRoomServiceSoapHttpPort',
                 'Action': 'http://xmlns.oracle.com/HiltonRoomService/initiate',
-                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http: //schemas.xmlsoap.org/soap/envelope/" xmlns:hil="http://xmlns.oracle.com/HiltonRoomService"><soapenv:Header/><soapenv:Body><hil:HiltonRoomServiceProcessRequest><hil:City>@City</hil:City><hil:Country>@Country</hil:Country><hil:Check-In>@Check-In</hil:Check-In><hil:Check-Out>@Check-Out</hil:Check-Out><hil:Rooms>@Rooms</hil:Rooms><hil:Type>@Type</hil:Type></hil:HiltonRoomServiceProcessRequest></soapenv:Body></soapenv:Envelope>',
+                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hil="http://xmlns.oracle.com/HiltonRoomService"><soapenv:Header/><soapenv:Body><hil:HiltonRoomServiceProcessRequest><hil:City>@City</hil:City><hil:Country>@Country</hil:Country><hil:Check-In>@Check-In</hil:Check-In><hil:Check-Out>@Check-Out</hil:Check-Out><hil:Rooms>@Rooms</hil:Rooms><hil:Type>@Type</hil:Type></hil:HiltonRoomServiceProcessRequest></soapenv:Body></soapenv:Envelope>',
                 'NullableParams': null,
                 'MandatoryParams': [
       '@City',
@@ -147,7 +147,7 @@ db.providers.insert({
     'reserve': {
       'endpoint': 'http://192.168.1.100:8888/TuresBalonProviders-HiltonBookingService-context-root/HiltonBookingServiceSoapHttpPort',
       'Action': 'http://services.hilton.com/types/bookRoom',
-      'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http: //schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://services.hilton.com/types/"><soapenv:Header/><soapenv:Body><typ:bookRoomElement><typ:r><typ:guestName>@guestName</typ:guestName><typ:roomNumber>@roomNumber</typ:roomNumber><typ:checkout>@checkout</typ:checkout><typ:hotel>@hotel</typ:hotel><typ:checkin>@checkin</typ:checkin></typ:r></typ:bookRoomElement></soapenv:Body></soapenv:Envelope>',
+      'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://services.hilton.com/types/"><soapenv:Header/><soapenv:Body><typ:bookRoomElement><typ:r><typ:guestName>@guestName</typ:guestName><typ:roomNumber>@roomNumber</typ:roomNumber><typ:checkout>@checkout</typ:checkout><typ:hotel>@hotel</typ:hotel><typ:checkin>@checkin</typ:checkin></typ:r></typ:bookRoomElement></soapenv:Body></soapenv:Envelope>',
       'NullableParams': [
       '@guestName',
       '@roomNumber',
@@ -173,7 +173,7 @@ db.providers.insert({
 
 db.providers.insert({
       'name': 'TEST',
-      'type': 'TEST',
+      'type': 'FLIGHTS',
       'integrationType': 'SOAP',
       'settings': {
         'request': {
@@ -182,8 +182,7 @@ db.providers.insert({
               'catalogue': {
                 'endpoint': 'https://cvnet.cpd.ua.es/servicioweb/publicos/pub_gestdocente.asmx',
                 'Action': 'http://UASI/WS_GESTDOCENTE.wsdl/wstitulosuni',
-                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://UASI/WS_GESTDOCENTE.wsdl\"><soapenv:Header/><soapenv:Body><ws:wstitulosuni><!--Optional:--><ws:plengua>@plengua</ws:plengua><!--Optional:--><ws:pcurso>@pcurso</ws:pcurso></ws:wstitulosuni></soapenv:Body></soapenv:Envelope>',
-
+                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://UASI/WS_GESTDOCENTE.wsdl"><soapenv:Header/><soapenv:Body><ws:wstitulosuni><!--Optional:--><ws:plengua>C</ws:plengua><!--Optional:--><ws:pcurso>2021-01</ws:pcurso></ws:wstitulosuni></soapenv:Body></soapenv:Envelope>',
                 'NullableParams': null,
                 'MandatoryParams': [
                   '@plengua',
@@ -281,12 +280,12 @@ db.providers.insert({
             'settings': {
                 'request': {
                     'parameters': {
-                        'endpoint': 'localhost:3306/MyBD',
-                        'user': 'abcv',
-                        'password': '234432',
+                        'endpoint': 'host.docker.internal:3306/COGNITIVE_SERVICE?createDatabaseIfNotExist=false',
+                        'user': 'root',
+                        'password': 'my-secret-pw',
                         'engineType': 'MYSQL',
                         'statements': {
-                            'catalogue': 'SELECT * FROM HJKAS',
+                            'catalogue': 'SELECT * FROM COGNITIVE_SERVICE.RECEIVED;',
                             'reserve': 'INSERT INTO ASD ...'
                         }
                     }
@@ -302,12 +301,12 @@ db.providers.insert({
             'settings': {
                 'request': {
                     'parameters': {
-                        'endpoint': 'localhost:3306/MyBD',
-                        'user': 'abcv',
-                        'password': '234432',
+                        'endpoint': 'host.docker.internal:3306/COGNITIVE_SERVICE?createDatabaseIfNotExist=false',
+                        'user': 'root',
+                        'password': 'my-secret-pw',
                         'engineType': 'MYSQL',
                         'statements': {
-                            'catalogue': 'SELECT * FROM HJKAS',
+                            'catalogue': 'SELECT * FROM COGNITIVE_SERVICE.RECEIVED;',
                             'reserve': 'INSERT INTO ASD ...'
                         }
                     }
@@ -316,25 +315,5 @@ db.providers.insert({
             }
         });
 
-db.providers.insert({
-            'type': 'EVENTS',
-            'name': 'CONCIERTOS ACVDE',
-            'integrationType': 'FTP',
-            'settings': {
-                'request': {
-                    'parameters': {
-                        'endpoint': 'localhost',
-                        'user': 'ASDSFDGFHGJ',
-                        'password': 'ASDFGFH32443',
-                        'path': 'pepito/',
-                        'filename': 'miarchivo',
-                        'delimeter': ','
-                    }
-                },
-                'response': {
-
-                }
-            }
-        });
-
 db.providers.find();
+
