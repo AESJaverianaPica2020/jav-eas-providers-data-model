@@ -1,206 +1,132 @@
-show dbs;
+version: "3"
+services:
 
-use touresbalon;
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    container_name: zookeeper
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
 
-db.createCollection('providers');
+  kafka:
+    image: 'bitnami/kafka:latest'
+    container_name: kafka
+    ports:
+      - '9092:9092'
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper
 
-db.providers.insert({
-      'name': 'AVIANCA',
-      'type': 'FLIGHTS',
-      'integrationType': 'SOAP',
-      'settings': {
-        'request': {
-          'parameters': {
-            'methods': {
-              'catalogue': {
-                'endpoint': 'http://host.docker.internal:7171/TuresBalonProviders-Avianca-context-root/ServicioAviancaVuelosSoapHttpPort',
-                'Action': 'http://servicios.avianca.com/types/consultarVuelo',
-                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://servicios.avianca.com/types/"><soapenv:Header/><soapenv:Body><typ:consultarVueloElement><typ:ciudadOrigen>@ciudadOrigen</typ:ciudadOrigen><typ:ciudadDestino>@ciudadDestino</typ:ciudadDestino><typ:fechaSalida>@fechaSalida</typ:fechaSalida><typ:clase>@clase</typ:clase></typ:consultarVueloElement></soapenv:Body></soapenv:Envelope>',
-                'NullableParams': [
-                '@ciudadOrigen',
-                '@ciudadDestino',
-                '@fechaSalida',
-                '@clase'
-              ],
-                'MandatoryParams': null,
-                'RelationConstrain': {
-                  '@clase': {
-                    'Eje': 'EJECUTIVO',
-                    'Pcl': 'PRIMERA CLASE',
-                    'Bar': 'BARATO'
-                  }
-                }
-              },
-              'reserve': {
-                'endpoint': 'http://host.docker.internal:7171/TuresBalonProviders-Avianca-context-root/ServicioAviancaVuelosSoapHttpPort',
-                'Action': 'http://servicios.avianca.com/types/reservarVuelo',
-                'EnvelopeRequest': '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://servicios.avianca.com/types/"><soapenv:Header/><soapenv:Body><typ:reservarVueloElement><typ:vuelo><typ:fechaSalida>@fechaSalida</typ:fechaSalida><typ:fechaLlegada>@fechaLlegada</typ:fechaLlegada><typ:ciudadOrigen>@ciudadOrigen</typ:ciudadOrigen><typ:vuelo>@vuelo</typ:vuelo><typ:clase>@clase</typ:clase><typ:ciudadDestino>@ciudadDestino</typ:ciudadDestino><typ:precio>@precio</typ:precio></typ:vuelo><typ:nombrePasajero>@nombrePasajero</typ:nombrePasajero><typ:numeroIdentidadPasajero>@numeroIdentidadPasajero</typ:numeroIdentidadPasajero></typ:reservarVueloElement></soapenv:Body></soapenv:Envelope>',
-                'NullableParams': [
-                '@fechaSalida',
-                '@fechaLlegada',
-                '@ciudadOrigen',
-                '@vuelo',
-                '@clase',
-                '@ciudadDestino',
-                '@precio',
-                '@nombrePasajero',
-                '@numeroIdentidadPasajero'
-              ],
-                'MandatoryParams': null,
-                'RelationConstrain': {
-                  '@clase': {
-                    'Eje': 'EJECUTIVO',
-                    'Pcl': 'PRIMERA CLASE',
-                    'Bar': 'BARATO'
-                  }
-                }
-              }
-            }
-          }
-        },
-        'response': {
-            'catalogue': {
-                "mainField": 'soapenv:Envelope|soapenv:Body|typ:consultarVueloResponseElement|typ:result|',
-                'canonicalModel': {
-                    'origin': 'typ:ciudadOrigen|',
-                    'destination': 'typ:ciudadDestino|',
-                    'startDate': 'typ:fechaLlegada|',
-                    'endDate': 'typ:fechaSalida|',
-                    'price': 'typ:precio|',
-                    'class': 'typ:clase|',
-                    'code': 'typ:vuelo|'
-                }
-            },
-            'reserve': {
-                "mainField": 'soapenv:Envelope|soapenv:Body|typ:reservarVueloResponseElement|',
-                'canonicalModel': {
-                    'status': 'typ:result|Boolean'
-                }
-            }
-        }
-      }
-    });
+  reader-params:
+    image: 'andresmartinezcobos/reader-params:0.6'
+    container_name: reader-params
+    ports:
+      - '9071:9071'
+    environment:
+      - MONGO_HOST_TOURES=host.docker.internal
+      - MONGO_PORT_TOURES=27017
+      - MONGO_DATABASE_TOURES=touresbalon
+      - MONGO_USER_TOURES=mongoadmin
+      - MONGO_PASSWORD_TOURES=secret
+      - KAFKA_SERVER_TOURES=host.docker.internal:9092
+      - KAFKA_TOPIC_PRODUCER_TOURES=topic-2-normalizer
+      - ENDPOINT_TRANSFORMER_TOURES=http://host.docker.internal:32792/api/v1/Transformer/
+      - PATH_TRANSFORMER_TOURES=TransformadorBase
 
-db.providers.insert({
-      'name': 'AMADEUS',
-      'type': 'FLIGHTS',
-      'integrationType': 'REST',
-      'settings': {
-        'request': {
-          'parameters': {
-            'methods': {
-              'catalogue': {
-                'BaseURL': 'https://providers.free.beeceptor.com',
-                'APIMethod': '/v1/shopping/flight-dates',
-                'HttpVerbose': 'GET',
-                'Header': {
-                  'TokenHeader': false,
-                  'HeaderParameters': null,
-                  'MediaTypeHeader': null,
-                  'TokenDefinition': null
-                },
-                'Body': {
-                  'BodyMediaType': null,
-                  'BodyJsonMessage': null,
-                  'BodyRawMessage': null
-                },
-                'Parameters': {
-                  'Parameters': {
-                    'origin': '@origin',
-                    'oneWay': '@oneWay',
-                    'nonStop': '@nonStop',
-                    'viewBy': '@viewBy',
-                    'departureDate': '@departureDate'
-                  }
-                }
-              },
-              'reserve': {
-                'BaseURL': 'https://providers.free.beeceptor.invalid.com',
-                'APIMethod': '/v1/shopping/flight-dates',
-                'HttpVerbose': 'POST',
-                'Header': {
-                  'TokenHeader': false,
-                  'HeaderParameters': null,
-                  'MediaTypeHeader': null,
-                  'TokenDefinition': null
-                },
-                'Body': {
-                  'BodyMediaType': null,
-                  'BodyJsonMessage': null,
-                  'BodyRawMessage': null
-                },
-                'Parameters': {
-                  'Parameters': {
-                    'origin': '@origin',
-                    'oneWay': '@oneWay',
-                    'nonStop': '@nonStop',
-                    'viewBy': '@viewBy',
-                    'departureDate': '@departureDate'
-                  }
-                }
-              }
-            }
-          }
-        },
-        'response': {
-            'catalogue': {
-                'mainField': 'data|',
-                'canonicalModel': {
-                    'origin': 'origin|',
-                    'destination': 'destination|',
-                    'startDate': 'departureDate|',
-                    'endDate': 'returnDate|',
-                    'price': 'price|total|'
-                }
-            },
-            'reserve': {
-                "mainField": '',
-                'canonicalModel': {
-                    'result': 'result|Boolean'
-                }
-            }
-        }
-      }
-    });
+  transform:
+    image: 'diegofdiazh/transformadorpica2020v7'
+    container_name: transform
+    ports:
+      - '32792:80'
 
+  mongoDB:
+    image: 'mongo'
+    container_name: mongoBD
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
 
-db.providers.insert({
-            'type': 'FLIGHTS',
-            'name': 'ABC',
-            'integrationType': 'DATABASE',
-            'settings': {
-                'request': {
-                    'parameters': {
-                        'parameters': {
-                            'endpoint': 'host.docker.internal:3306/COGNITIVE_SERVICE?createDatabaseIfNotExist=false',
-                            'user': 'root',
-                            'password': 'Cobos.91',
-                            'engineType': 'MYSQL',
-                            'statements': {
-                                'catalogue': 'SELECT * FROM COGNITIVE_SERVICE.RECEIVED LIMIT 2;',
-                                'reserve': 'INSERT INTO RECEIVED (UUID, EXTENSION) VALUES (\'2c3701c8-c71d-4ed6-bc0f-c685f2f7a909\', \'jpg\');'
-                            }
-                        }
-                    }
-                },
-                'response': {
-                    'catalogue': {
-                        'mainField': 'details|',
-                        'canonicalModel': {
-                            'origin': 'CREATE_AT|',
-                            'destination': 'EXTENSION|',
-                            'startDate': 'UUID|'
-                        }
-                    },
-                    'reserve': {
-                        'mainField': '',
-                        'canonicalModel': {
-                            'result': 'idProcess|NotEmpty'
-                        }
-                    }
-                }
-            }
-        });
+  drools:
+    image: 'juancmoralesp/drools:v6'
+    container_name: drools
+    ports:
+      - '9073:9073'
+    environment:
+      - KAFKA_SERVER_TOURES=host.docker.internal:9092
+      - KAFKA_TOPIC_PRODUCER_TOURES=topic-1-normalizer
+      - RULES_PATH=/tmp/reglas_negocio/rules.xlsx
+    volumes:A
+      - /Users/PICA/toures/reglas_negocio:/tmp/reglas_negocio
 
-db.providers.find();
+  adapterDB:
+    image: 'andresmartinezcobos/providers-adapter-db:0.3'
+    container_name: adapterDB
+    ports:
+      - '9070:9070'
 
+  adapterRest:
+    image: 'thefallencol/restadapter-api:v1.2'
+    container_name: adapterRest
+    ports:
+      - '32785:80'
+
+  adapterSoap:
+    image: 'thefallencol/webserviceadapter:v1.0'
+    container_name: adapterSoap
+    ports:
+      - '32788:80'
+
+  adapterFtp:
+    image: 'diegofdiazh/adapterftp_pica2020'
+    container_name: adapterFtp
+    ports:
+      - '32790:80'
+
+  router:
+    image: 'juancmoralesp/router:v4'
+    container_name: router
+    ports:
+      - '32791:80'
+
+  normalizador:
+    image: 'andresmartinezcobos/normalizer:0.7'
+    container_name: normalizador
+    ports:
+      - '9074:9074'
+    environment:
+      - KAFKA_SERVER_TOURES=host.docker.internal:9092
+      - KAFKA_TOPIC_PRODUCER_TOURES=topic-3-normalizer
+      - ENDPOINT_READER_TOURES=http://host.docker.internal:9071/V1/Enterprise/
+      - PATH_READER_TOURES=providers/
+      - ENDPOINT_CACHE_TOURES=http://host.docker.internal:32793/
+      - PATH_CACHE_SAVE_TOURES=set/
+      - PATH_CACHE_GET_TOURES=get/
+  
+  redis:
+    image: 'redis'
+    container_name: redis
+    ports:
+      - '6379:6379'
+
+  integradorcache:
+    image: 'juancmoralesp/integradorcache:v2'
+    container_name: integradorcache
+    ports:
+      - '32793:80'
+
+  vuelosCore:
+    image: 'diegofdiazh/vueloscorev2:v9'
+    container_name: vuelosCore
+    ports:
+      - '32794:80'
+
+networks:
+  default:
+    external:
+      name: toures-balon-network
