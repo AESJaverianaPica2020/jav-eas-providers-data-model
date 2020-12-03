@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="bf1eb33a-765c-4200-a06c-1e7be4372aa2" activeEnvironment="Default" name="HiltonRoomService" resourceRoot="" soapui-version="5.6.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="ec6d8eab-ef8f-4b84-bf6c-ea68f666fe66" wsaVersion="NONE" name="HiltonRoomServiceSoapHttp" type="wsdl" bindingName="{http://xmlns.oracle.com/HiltonRoomService}HiltonRoomServiceSoapHttp" soapVersion="1_1" anonymous="optional" definition="file:/Users/gmarti4bancodebogota.com.co/Downloads/Contratos-v1/HiltonRoomService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/Users/gmarti4bancodebogota.com.co/Downloads/Contratos-v1/HiltonRoomService.wsdl"><con:part><con:url>file:/Users/gmarti4bancodebogota.com.co/Downloads/Contratos-v1/HiltonRoomService.wsdl</con:url><con:content><![CDATA[<definitions name="HiltonRoomService" targetNamespace="http://xmlns.oracle.com/HiltonRoomService" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:client="http://xmlns.oracle.com/HiltonRoomService" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and use them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  <types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="http://xmlns.oracle.com/HiltonRoomService" schemaLocation="HiltonRoomService.xsd"/>
+    </schema>
+  </types>
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  <message name="HiltonRoomServiceRequestMessage">
+    <part name="payload" element="client:HiltonRoomServiceProcessRequest"/>
+  </message>
+  <message name="HiltonRoomServiceResponseMessage">
+    <part name="payload" element="client:HiltonRoomServiceProcessResponse"/>
+  </message>
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  <!--portType implemented by the HiltonRoomService BPEL process-->
+  <portType name="HiltonRoomService">
+    <operation name="initiate">
+      <input message="client:HiltonRoomServiceRequestMessage"/>
+      <output message="client:HiltonRoomServiceResponseMessage"/>
+    </operation>
+  </portType>
+  <!--portType name="HiltonRoomService">
+		<operation name="initiate">
+			<input message="client:HiltonRoomServiceRequestMessage"/>
+		</operation>
+	</portType-->
+  <!--portType implemented by the requester of HiltonRoomService BPEL process
+	for asynchronous callback purposes-->
+  <!--portType name="HiltonRoomServiceCallback">
+		<operation name="onResult">
+			<input message="client:HiltonRoomServiceResponseMessage"/>
+		</operation>
+	</portType-->
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	the HiltonRoomService partnerLinkType binds the provider and
+	requester portType into an asynchronous conversation.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  <!--plnk:partnerLinkType name="HiltonRoomService">
+		<plnk:role name="HiltonRoomServiceProvider">
+			<plnk:portType name="client:HiltonRoomService"/>
+		</plnk:role>
+		<plnk:role name="HiltonRoomServiceRequester">
+			<plnk:portType name="client:HiltonRoomServiceCallback"/>
+		</plnk:role>
+	</plnk:partnerLinkType-->
+  <binding name="HiltonRoomServiceSoapHttp" type="client:HiltonRoomService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="initiate">
+      <soap:operation soapAction="http://xmlns.oracle.com/HiltonRoomService/initiate"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="HiltonRoomService">
+    <port name="HiltonRoomServiceSoapHttpPort" binding="client:HiltonRoomServiceSoapHttp">
+      <soap:address location="http://192.168.1.100:8888/TuresBalonProviders-HRS-context-root/HiltonRoomServiceSoapHttpPort"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:/Users/gmarti4bancodebogota.com.co/Downloads/Contratos-v1/HiltonRoomService.xsd</con:url><con:content><![CDATA[<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/HiltonRoomService" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xmlns.oracle.com/HiltonRoomService">
+  <element name="HiltonRoomServiceProcessRequest">
+    <complexType>
+      <sequence>
+        <element name="City" type="string"/>
+        <element name="Country" type="string"/>
+        <element name="Check-In" type="date"/>
+        <element name="Check-Out" type="date"/>
+        <element name="Rooms" type="integer"/>
+        <element name="Type" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="HiltonRoomServiceProcessResponse">
+    <complexType>
+      <sequence>
+        <element name="result" type="tns:RoomList"/>
+      </sequence>
+    </complexType>
+  </element>
+  <complexType name="Hotel">
+    <sequence>
+      <element name="Name" type="string"/>
+      <element name="Address" type="string"/>
+      <element name="City" type="string"/>
+      <element name="Country" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="Room">
+    <sequence>
+      <element name="Number" type="integer"/>
+      <element name="Hotel" type="tns:Hotel"/>
+      <element name="Price" type="float"/>
+      <element name="Type" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="RoomList">
+    <sequence>
+      <element name="Rooms" type="tns:Room" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://192.168.1.100:8888/TuresBalonProviders-HRS-context-root/HiltonRoomServiceSoapHttpPort</con:endpoint></con:endpoints><con:operation id="cf50d810-3349-4f62-9711-73ad2fbb2ccf" isOneWay="false" action="http://xmlns.oracle.com/HiltonRoomService/initiate" name="initiate" bindingOperationName="initiate" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="cb92786e-443c-47ce-b404-01a3d4a268be" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7073/TuresBalonProviders-HRS-context-root/HiltonRoomServiceSoapHttpPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hil="http://xmlns.oracle.com/HiltonRoomService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <hil:HiltonRoomServiceProcessRequest>
+         <hil:City>BOG</hil:City>
+         <hil:Country>CCOL</hil:Country>
+         <hil:Check-In>2020-12-15</hil:Check-In>
+         <hil:Check-Out>2020-12-30</hil:Check-Out>
+         <hil:Rooms>1</hil:Rooms>
+         <hil:Type>A</hil:Type>
+      </hil:HiltonRoomServiceProcessRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://xmlns.oracle.com/HiltonRoomService/initiate"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService id="a4e30b62-aeff-40a7-9b53-4030663e1cc7" port="7073" path="/" host="MacBook-Pro-de-AdSegLocDom.local" name="MockService 1" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="initiate" id="ef53767b-dee3-4bfd-9b0c-2e734aa83b05" interface="HiltonRoomServiceSoapHttp" operation="initiate"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="c5bc5f6b-a98c-4a0d-af2a-30b54070a121" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hil="http://xmlns.oracle.com/HiltonRoomService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <hil:HiltonRoomServiceProcessResponse>
+         <hil:result>
+            <!--Zero or more repetitions:-->
+            <hil:Rooms>
+               <hil:Number>12A</hil:Number>
+               <hil:Hotel>
+                  <hil:Name>HILTON A</hil:Name>
+                  <hil:Address>AVENIDA SIEMPRE VIVA 123</hil:Address>
+                  <hil:City>BOG</hil:City>
+                  <hil:Country>COL</hil:Country>
+               </hil:Hotel>
+               <hil:Price>1988873</hil:Price>
+               <hil:Type>B</hil:Type>
+            </hil:Rooms>
+            <hil:Rooms>
+               <hil:Number>12B</hil:Number>
+               <hil:Hotel>
+                  <hil:Name>HILTON A</hil:Name>
+                  <hil:Address>AVENIDA SIEMPRE VIVA 123</hil:Address>
+                  <hil:City>BOG</hil:City>
+                  <hil:Country>COL</hil:Country>
+               </hil:Hotel>
+               <hil:Price>2088873</hil:Price>
+               <hil:Type>A</hil:Type>
+            </hil:Rooms>
+            <hil:Rooms>
+               <hil:Number>203</hil:Number>
+               <hil:Hotel>
+                  <hil:Name>HILTON B</hil:Name>
+                  <hil:Address>ABC 123 FDS</hil:Address>
+                  <hil:City>BOG</hil:City>
+                  <hil:Country>COL</hil:Country>
+               </hil:Hotel>
+               <hil:Price>1188873</hil:Price>
+               <hil:Type>B</hil:Type>
+            </hil:Rooms>
+         </hil:result>
+      </hil:HiltonRoomServiceProcessResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://xmlns.oracle.com/HiltonRoomService/initiate"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

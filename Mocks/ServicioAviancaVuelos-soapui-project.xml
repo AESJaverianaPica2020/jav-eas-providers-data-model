@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="37bc6d6f-da53-4b45-9609-23d58b8b40a9" activeEnvironment="Default" name="ServicioAviancaVuelos" resourceRoot="" soapui-version="5.6.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="3bf4167b-0583-4a8d-a700-d1e10bc0ebcb" wsaVersion="NONE" name="ServicioAviancaVuelosSoapHttp" type="wsdl" bindingName="{http://servicios.avianca.com/}ServicioAviancaVuelosSoapHttp" soapVersion="1_1" anonymous="optional" definition="file:/Users/gmarti4bancodebogota.com.co/Downloads/Contratos-v1/ServicioAviancaVuelos.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/Users/gmarti4bancodebogota.com.co/Downloads/Contratos-v1/ServicioAviancaVuelos.wsdl"><con:part><con:url>file:/Users/gmarti4bancodebogota.com.co/Downloads/Contratos-v1/ServicioAviancaVuelos.wsdl</con:url><con:content><![CDATA[<definitions name="ServicioAviancaVuelos" targetNamespace="http://servicios.avianca.com/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://servicios.avianca.com/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns0="http://servicios.avianca.com/types/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <schema targetNamespace="http://servicios.avianca.com/types/" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://servicios.avianca.com/types/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap11-enc="http://schemas.xmlsoap.org/soap/encoding/">
+      <complexType name="Vuelo">
+        <sequence>
+          <element name="fechaSalida" type="dateTime" nillable="true"/>
+          <element name="fechaLlegada" type="dateTime" nillable="true"/>
+          <element name="ciudadOrigen" type="string" nillable="true"/>
+          <element name="vuelo" type="string" nillable="true"/>
+          <element name="clase" type="string" nillable="true"/>
+          <element name="ciudadDestino" type="string" nillable="true"/>
+          <element name="precio" type="long" nillable="true"/>
+        </sequence>
+      </complexType>
+      <element name="consultarVueloElement">
+        <complexType>
+          <sequence>
+            <element name="ciudadOrigen" type="string" nillable="true"/>
+            <element name="ciudadDestino" type="string" nillable="true"/>
+            <element name="fechaSalida" type="dateTime" nillable="true"/>
+            <element name="clase" type="string" nillable="true"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="consultarVueloResponseElement">
+        <complexType>
+          <sequence>
+            <element name="result" type="tns:Vuelo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="reservarVueloElement">
+        <complexType>
+          <sequence>
+            <element name="vuelo" type="tns:Vuelo" nillable="true"/>
+            <element name="nombrePasajero" type="string" nillable="true"/>
+            <element name="numeroIdentidadPasajero" type="int" nillable="true"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="reservarVueloResponseElement">
+        <complexType>
+          <sequence>
+            <element name="result" type="boolean"/>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="ServicioAviancaVuelos_consultarVuelo">
+    <part name="parameters" element="tns0:consultarVueloElement"/>
+  </message>
+  <message name="ServicioAviancaVuelos_consultarVueloResponse">
+    <part name="parameters" element="tns0:consultarVueloResponseElement"/>
+  </message>
+  <message name="ServicioAviancaVuelos_reservarVuelo">
+    <part name="parameters" element="tns0:reservarVueloElement"/>
+  </message>
+  <message name="ServicioAviancaVuelos_reservarVueloResponse">
+    <part name="parameters" element="tns0:reservarVueloResponseElement"/>
+  </message>
+  <portType name="ServicioAviancaVuelos">
+    <operation name="consultarVuelo">
+      <input message="tns:ServicioAviancaVuelos_consultarVuelo"/>
+      <output message="tns:ServicioAviancaVuelos_consultarVueloResponse"/>
+    </operation>
+    <operation name="reservarVuelo">
+      <input message="tns:ServicioAviancaVuelos_reservarVuelo"/>
+      <output message="tns:ServicioAviancaVuelos_reservarVueloResponse"/>
+    </operation>
+  </portType>
+  <binding name="ServicioAviancaVuelosSoapHttp" type="tns:ServicioAviancaVuelos">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="consultarVuelo">
+      <soap:operation soapAction="http://servicios.avianca.com//consultarVuelo"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="reservarVuelo">
+      <soap:operation soapAction="http://servicios.avianca.com//reservarVuelo"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="ServicioAviancaVuelos">
+    <port name="ServicioAviancaVuelosSoapHttpPort" binding="tns:ServicioAviancaVuelosSoapHttp">
+      <soap:address location="http://192.168.1.100:8888/TuresBalonProviders-Avianca-context-root/ServicioAviancaVuelosSoapHttpPort"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://192.168.1.100:8888/TuresBalonProviders-Avianca-context-root/ServicioAviancaVuelosSoapHttpPort</con:endpoint></con:endpoints><con:operation id="28ab0f0c-dca1-441e-9e3f-caacaf6bb297" isOneWay="false" action="http://servicios.avianca.com//consultarVuelo" name="consultarVuelo" bindingOperationName="consultarVuelo" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="052a7470-f3e2-40c0-a4e6-c12d325b7b03" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7171/TuresBalonProviders-Avianca-context-root/ServicioAviancaVuelosSoapHttpPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://servicios.avianca.com/types/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <typ:consultarVueloElement>
+         <typ:ciudadOrigen>?</typ:ciudadOrigen>
+         <typ:ciudadDestino>?</typ:ciudadDestino>
+         <typ:fechaSalida>?</typ:fechaSalida>
+         <typ:clase>?</typ:clase>
+      </typ:consultarVueloElement>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://servicios.avianca.com//consultarVuelo"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="f6bc8379-6c04-4e6a-8b77-8b2557932d48" isOneWay="false" action="http://servicios.avianca.com//reservarVuelo" name="reservarVuelo" bindingOperationName="reservarVuelo" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="05e01121-2fea-4959-9578-14cadb048530" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7171/TuresBalonProviders-Avianca-context-root/ServicioAviancaVuelosSoapHttpPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://servicios.avianca.com/types/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <typ:reservarVueloElement>
+         <typ:vuelo>
+            <typ:fechaSalida>2020-12-05</typ:fechaSalida>
+            <typ:fechaLlegada>2020-12-07</typ:fechaLlegada>
+            <typ:ciudadOrigen>BOG</typ:ciudadOrigen>
+            <typ:vuelo>ASD</typ:vuelo>
+            <typ:clase>MED</typ:clase>
+            <typ:ciudadDestino>MED</typ:ciudadDestino>
+            <typ:precio>120000</typ:precio>
+         </typ:vuelo>
+         <typ:nombrePasajero>?</typ:nombrePasajero>
+         <typ:numeroIdentidadPasajero>?</typ:numeroIdentidadPasajero>
+      </typ:reservarVueloElement>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://servicios.avianca.com//reservarVuelo"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService id="1af8e83a-7f7c-4666-848b-37369324f9d6" port="7171" path="/" host="MacBook-Pro-de-AdSegLocDom.local" name="MockService 1" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="consultarVuelo" id="e724bb3a-be24-407a-b14b-ab01a0f19025" interface="ServicioAviancaVuelosSoapHttp" operation="consultarVuelo"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="321c7021-6615-4be8-9e7b-044f534a8620" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://servicios.avianca.com/types/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <typ:consultarVueloResponseElement>
+         <!--Zero or more repetitions:-->
+         <typ:result>
+            <typ:fechaSalida>2020-12-05</typ:fechaSalida>
+            <typ:fechaLlegada>2020-12-02</typ:fechaLlegada>
+            <typ:ciudadOrigen>BOG</typ:ciudadOrigen>
+            <typ:vuelo>ASDC</typ:vuelo>
+            <typ:clase>ECONOMIC</typ:clase>
+            <typ:ciudadDestino>CTG</typ:ciudadDestino>
+            <typ:precio>1234556</typ:precio>
+         </typ:result>
+         <typ:result>
+            <typ:fechaSalida>2020-12-05</typ:fechaSalida>
+            <typ:fechaLlegada>2020-12-02</typ:fechaLlegada>
+            <typ:ciudadOrigen>BOG</typ:ciudadOrigen>
+            <typ:vuelo>ASDFF</typ:vuelo>
+            <typ:clase>MEDIMUM</typ:clase>
+            <typ:ciudadDestino>CTG</typ:ciudadDestino>
+            <typ:precio>3234556</typ:precio>
+         </typ:result><typ:result>
+            <typ:fechaSalida>2020-12-05</typ:fechaSalida>
+            <typ:fechaLlegada>2020-12-02</typ:fechaLlegada>
+            <typ:ciudadOrigen>BOG</typ:ciudadOrigen>
+            <typ:vuelo>ASDSDC</typ:vuelo>
+            <typ:clase>PREMIUM</typ:clase>
+            <typ:ciudadDestino>CTG</typ:ciudadDestino>
+            <typ:precio>455666</typ:precio>
+         </typ:result>
+      </typ:consultarVueloResponseElement>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://servicios.avianca.com//consultarVuelo"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="reservarVuelo" id="baffc600-58b4-4560-99e8-b313ea776d7f" interface="ServicioAviancaVuelosSoapHttp" operation="reservarVuelo"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="e131faf2-71c8-460e-b142-e1d170b6e4f8" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://servicios.avianca.com/types/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <typ:reservarVueloResponseElement>
+         <typ:result>false</typ:result>
+      </typ:reservarVueloResponseElement>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://servicios.avianca.com//reservarVuelo"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

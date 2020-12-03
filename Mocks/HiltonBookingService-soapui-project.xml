@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="f695f7cc-52b8-4d46-8205-cad47a3eacbf" activeEnvironment="Default" name="HiltonBookingService" resourceRoot="" soapui-version="5.6.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="e100ded9-bddf-4df7-a996-1b2c61e711d6" wsaVersion="NONE" name="HiltonBookingServiceSoapHttp" type="wsdl" bindingName="{http://services.hilton.com/}HiltonBookingServiceSoapHttp" soapVersion="1_1" anonymous="optional" definition="file:/Users/gmarti4bancodebogota.com.co/Downloads/Contratos-v1/HiltonBookingService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/Users/gmarti4bancodebogota.com.co/Downloads/Contratos-v1/HiltonBookingService.wsdl"><con:part><con:url>file:/Users/gmarti4bancodebogota.com.co/Downloads/Contratos-v1/HiltonBookingService.wsdl</con:url><con:content><![CDATA[<definitions name="HiltonBookingService" targetNamespace="http://services.hilton.com/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.hilton.com/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns0="http://services.hilton.com/types/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <schema targetNamespace="http://services.hilton.com/types/" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.hilton.com/types/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap11-enc="http://schemas.xmlsoap.org/soap/encoding/">
+      <complexType name="RoomReservation">
+        <sequence>
+          <element name="guestName" type="string" nillable="true"/>
+          <element name="roomNumber" type="int"/>
+          <element name="checkout" type="dateTime" nillable="true"/>
+          <element name="hotel" type="string" nillable="true"/>
+          <element name="checkin" type="dateTime" nillable="true"/>
+        </sequence>
+      </complexType>
+      <element name="bookRoomElement">
+        <complexType>
+          <sequence>
+            <element name="r" type="tns:RoomReservation" nillable="true"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="bookRoomResponseElement">
+        <complexType>
+          <sequence>
+            <element name="result" type="int"/>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="HiltonBookingService_bookRoom">
+    <part name="parameters" element="tns0:bookRoomElement"/>
+  </message>
+  <message name="HiltonBookingService_bookRoomResponse">
+    <part name="parameters" element="tns0:bookRoomResponseElement"/>
+  </message>
+  <portType name="HiltonBookingService">
+    <operation name="bookRoom">
+      <input message="tns:HiltonBookingService_bookRoom"/>
+      <output message="tns:HiltonBookingService_bookRoomResponse"/>
+    </operation>
+  </portType>
+  <binding name="HiltonBookingServiceSoapHttp" type="tns:HiltonBookingService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="bookRoom">
+      <soap:operation soapAction="http://services.hilton.com//bookRoom"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="HiltonBookingService">
+    <port name="HiltonBookingServiceSoapHttpPort" binding="tns:HiltonBookingServiceSoapHttp">
+      <soap:address location="http://192.168.1.100:8888/TuresBalonProviders-HiltonBookingService-context-root/HiltonBookingServiceSoapHttpPort"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://192.168.1.100:8888/TuresBalonProviders-HiltonBookingService-context-root/HiltonBookingServiceSoapHttpPort</con:endpoint></con:endpoints><con:operation id="cb90ca84-3a44-4491-bcdb-b496f2bfc2e3" isOneWay="false" action="http://services.hilton.com//bookRoom" name="bookRoom" bindingOperationName="bookRoom" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ed68ac17-eaa0-449e-9c06-5029a6622683" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7074/TuresBalonProviders-HiltonBookingService-context-root/HiltonBookingServiceSoapHttpPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://services.hilton.com/types/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <typ:bookRoomElement>
+         <typ:r>
+            <typ:guestName>Diegaaaaa</typ:guestName>
+            <typ:roomNumber>2</typ:roomNumber>
+            <typ:checkout>2020-12-20</typ:checkout>
+            <typ:hotel>HILTON A</typ:hotel>
+            <typ:checkin>2020-12-12</typ:checkin>
+         </typ:r>
+      </typ:bookRoomElement>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.hilton.com//bookRoom"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService id="ba7f04b7-09b1-42de-a301-30b2088b1da7" port="7074" path="/" host="MacBook-Pro-de-AdSegLocDom.local" name="MockService 1" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="bookRoom" id="6c8659cf-c556-4e2c-83e5-200680680311" interface="HiltonBookingServiceSoapHttp" operation="bookRoom"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="89376506-5b50-4f3f-897a-7fc27b9e0e4c" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://services.hilton.com/types/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <typ:bookRoomResponseElement>
+         <typ:result>true</typ:result>
+      </typ:bookRoomResponseElement>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://services.hilton.com//bookRoom"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
