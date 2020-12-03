@@ -10,9 +10,9 @@ CREATE TABLE VUELOS (
   fecha_llegada DATE NOT NULL
 );
 INSERT INTO VUELOS (cabina, ciudad_salida, ciudad_llegada, precio, fecha_salida, fecha_llegada)
-VALUES ('ECONOMICA', 'BOG', 'CTG', 160000, '2020-12-05', '2020-12-10'),
-('MEDIANA', 'BOG', 'CTG', 360000, '2020-12-05', '2020-12-10'),
-('PREMIUM', 'BOG', 'CTG', 860000, '2020-12-05', '2020-12-10');
+VALUES ('ECONOMICA', 'BOG', 'CTG', 160000, '2020-11-05', '2020-12-31'),
+('MEDIANA', 'BOG', 'CTG', 360000, '2020-11-05', '2020-12-31'),
+('PREMIUM', 'BOG', 'CTG', 860000, '2020-11-05', '2020-12-31');
 CREATE TABLE RESERVAS_VUELOS (
     vuelo_id INT NOT NULL,
     cantidad_pasajeros INT NOT NULL DEFAULT 1
