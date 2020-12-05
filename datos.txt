@@ -256,7 +256,7 @@ db.providers.insert({
                 }
             },
             'reserve': {
-                "mainField": 'soapenv:Envelope|soapenv:Body|typ:bookRoomResponseElementv|',
+                "mainField": 'soapenv:Envelope|soapenv:Body|typ:bookRoomResponseElement|',
                 'canonicalModel': {
                     'status': 'typ:result|Boolean'
                 }
@@ -342,5 +342,6 @@ db.providers.insert({
         }
       }
     });
+
     
 db.providers.find();
