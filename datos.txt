@@ -1,3 +1,9 @@
+show dbs;
+
+use touresbalon;
+
+db.createCollection('providers');
+
 db.providers.insert({
       'name': 'AVIANCA',
       'type': 'FLIGHTS',
@@ -336,3 +342,6 @@ db.providers.insert({
         }
       }
     });
+    
+    
+db.providers.find();
