@@ -1,9 +1,3 @@
-show dbs;
-
-use touresbalon;
-
-db.createCollection('providers');
-
 db.providers.insert({
       'name': 'AVIANCA',
       'type': 'FLIGHTS',
@@ -130,7 +124,13 @@ db.providers.insert({
                   'BodyRawMessage': null
                 },
                 'Parameters': {
-                  'Parameters': null
+                  'Parameters': {
+                    'origin': '@Origin',
+                    'oneWay': '1',
+                    'nonStop': 'false',
+                    'viewBy': 'Country',
+                    'departureDate': '@StartDate'
+                  }
                 }
               }
             }
@@ -306,7 +306,11 @@ db.providers.insert({
                   'BodyRawMessage': null
                 },
                 'Parameters': {
-                  'Parameters': null
+                  'Parameters': {
+                    'city': '@Destination',
+                    'checkInDate': '@StartDate',
+                    'checkOutDate': '@EndDate'
+                  }
                 }
               }
             }
@@ -332,5 +336,3 @@ db.providers.insert({
         }
       }
     });
-        
-db.providers.find();
