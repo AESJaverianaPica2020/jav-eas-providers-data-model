@@ -125,8 +125,8 @@ db.providers.insert({
                   'TokenDefinition': null
                 },
                 'Body': {
-                  'BodyMediaType': null,
-                  'BodyJsonMessage': null,
+                  'BodyMediaType': 'application/json',
+                  'BodyJsonMessage': '{"origin": "@Origin","oneWay": "1","nonStop": "false","viewBy": "Country","departureDate": "@StartDate"}',
                   'BodyRawMessage': null
                 },
                 'Parameters': {
@@ -307,8 +307,8 @@ db.providers.insert({
                   'TokenDefinition': null
                 },
                 'Body': {
-                  'BodyMediaType': null,
-                  'BodyJsonMessage': null,
+                  'BodyMediaType': 'application/json',
+                  'BodyJsonMessage': '{"city": "@Destination","checkInDate": "@StartDate","checkOutDate": "@EndDate"}',
                   'BodyRawMessage': null
                 },
                 'Parameters': {
@@ -342,6 +342,5 @@ db.providers.insert({
         }
       }
     });
-    
     
 db.providers.find();
